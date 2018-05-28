@@ -1,6 +1,10 @@
-console.log("x_x");
+import {SquareGrid} from './square-grid.js';
+import {renderFruit} from './fruit.js';
 
 
+/**
+ * Return a rate-limited function
+ */
 export function throttle(ms, f) {
   let captured = false;
 
@@ -24,22 +28,27 @@ export function throttle(ms, f) {
 
 let topEl = {};
 let botEl = {}
+let fruitEl = {};
 
+/**
+ * Initiate ...
+ */
 export function afterLoad(ev) {
   topEl = document.getElementById("knav");
-  botEl = document.getElementById('knav-bottom');
+  botEl = document.getElementById("knav-bottom");
+  fruitEl = document.getElementById("fruits");
 
   let floatingClass = "knav-floating";
   let stickingClass = "knav-sticking";
 
-
   window.addEventListener('scroll', scroll);
-  console.log(topEl.offsetHeight);
+
+  renderFruit(fruitEl, {});
 }
 
 
 /**
- *
+ * Set KNAV to floating on bottom mode
  */
 function setFloating() {
   console.log("[Floating]");
@@ -47,7 +56,7 @@ function setFloating() {
 
 
 /**
- *
+ * Set KNAV to sticking to bottom mode
  */
 function setSticking() {
   console.log("[Sticking]");
