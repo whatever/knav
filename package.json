@@ -1,0 +1,33 @@
+{
+  "name": "knav",
+  "version": "0.0.0",
+  "description": "knav",
+  "main": "index.js",
+  "scripts": {
+    "ayy": "node ./node_modules/webpack/bin/webpack.js",
+    "lmao": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --content-base=app/ --inline --hot",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/internet-research-labs/knav.git"
+  },
+  "keywords": [
+    "svvim"
+  ],
+  "author": "Matt Owen",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/internet-research-labs/knav/issues"
+  },
+  "homepage": "https://github.com/internet-research-labs/knav",
+  "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "copy-webpack-plugin": "^4.0.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.15.1"
+  }
+}
