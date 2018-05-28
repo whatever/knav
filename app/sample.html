@@ -13,10 +13,23 @@
         font-family: sans-serif;
       }
 
-      #bottom-knav ul li, #knav ul li {
+      #knav-bottom ul li, #knav ul li {
         display: inline-block;
         padding-right: 3em;
         float: left;
+      }
+
+      #knav-bottom {
+        height: 100px;
+      }
+
+      .floating {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+      }
+
+      .sticking {
       }
 
       a, a:active, a:visited, a:link {
@@ -35,9 +48,11 @@
         min-height: 150px;
       }
 
+      /*
 			#bottom-info, #knav {
         background-image: url('/cherries-watermarked.jpg');
 			}
+      */
 
       #fruits {
         border: solid 1px black;
@@ -56,8 +71,17 @@
         height: 1200px;
       }
 
+      .clearfix {
+        overflow: auto;
+      }
+
+      .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
     </style>
-    <script src="/assets/knav.bundled.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.2/dat.gui.min.js"></script>
   </head>
   <body>
 
@@ -72,12 +96,12 @@
     </header>
 
     <br>
-    <canvas width="300" height="300" id="fruits"></canvas>
+    <canvas width="900" height="900" id="fruits"></canvas>
 
     <div id="FILLER"></div>
 
-    <footer>
-      <section id="bottom-knav">
+    <footer id="complete-bottom">
+      <section id="knav-bottom" class="sticking">
         <ul>
           <li style="font-size: 120%;"><a href="?okay">JEEDS</a></li>
           <li><a href="?WORK">Work</a></li>
@@ -85,12 +109,52 @@
           <li><a href="?WORK">Blah  lah blah</a></li>
         </ul>
       </section>
-      <div style="clear:both; height: 100px;"></div>
+      <div style="clear:both; height: 0px;"></div>
       <section id="bottom-info">Slowly, desperately slowly it seemed to us as we watched, the remains of passage debris that encumbered the lower part of the doorway were removed, until at last we had the whole door clear before us. The decisive moment had arrived. With trembling hands I made a tiny breach in the upper left hand corner. Darkness and blank space, as far as an iron testing-rod could reach, showed that whatever lay beyond was empty, and not filled like the passage we had just cleared. Candle tests were applied as a precaution against possible foul gases, and then, widening the hole a little, I inserted the candle and peered in, Lord Carnarvon, Lady Evelyn [Lord Carnarvon's daughter] and Callender [an assistant] standing anxiously beside me to hear the verdict. At first I could see nothing, the hot air escaping from the chamber causing the candle flame to flicker, but presently, as my eyes grew accustomed to the light, details of the room within emerged slowly from the mist, strange animals, statues, and gold - everywhere the glint of gold. For the moment - an eternity it must have seemed to the others standing by - I was struck dumb with amazement, and when Lord Carnarvon, unable to stand the suspense any longer, inquired anxiously, 'Can you see anything?' it was all I could do to get out the words, 'Yes, wonderful things.' Then widening the hole a little further, so that we both could see, we inserted an electric torch.</section>
     </footer>
 
+    <script src="/assets/knav.bundled.js"></script>
     <script>
       window.addEventListener('load', knav.afterLoad);
+      var Cherries = function () {
+        this.xspacing = 2.0;
+        this.yspacing = 2.0;
+        this.x = 10.01;
+        this.y = 10.01;
+      };
+
+      var params = new Cherries();
+      var gui = new dat.GUI({
+        load: {
+          "preset": "Default",
+          "closed": false,
+          "remembered": {
+            "Default": {
+              "0": {}
+            }
+          },
+          "folders": {
+            "CHERRIES CHERRIES CHERRIES": {
+              "preset": "Default",
+              "closed": false,
+              "folders": {}
+            }
+          }
+        }
+      });
+      gui.remember(params);
+
+      var folder = gui.addFolder("CHERRIES CHERRIES CHERRIES");
+      folder.add(params, "xspacing", 0.1, 69.0).onChange(update);
+      folder.add(params, "yspacing", 0.1, 69.0).onChange(update);
+      folder.add(params, "x", 1, 69).onChange(update);
+      folder.add(params, "y", 1, 69).onChange(update);
+      folder.open();
+
+      function update() {
+        knav.afterLoad(undefined);
+        knav.render(params.x, params.y, params.xspacing, params.yspacing);
+      }
     </script>
   </body>
 </html>
