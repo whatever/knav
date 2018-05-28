@@ -43,7 +43,7 @@ export function afterLoad(ev) {
 
   window.addEventListener('scroll', scroll);
 
-  renderFruit(fruitEl, {});
+  renderFruit(fruitEl, 10, 10);
 }
 
 
@@ -53,7 +53,6 @@ export function afterLoad(ev) {
 function setFloating() {
   console.log("[Floating]");
 }
-
 
 /**
  * Set KNAV to sticking to bottom mode

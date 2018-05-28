@@ -21,6 +21,13 @@ export class SquareGrid {
     ];
   }
 
+  getBoxCenter(i, j) {
+    return [
+      (i+0.5)*this.dx,
+      (j+0.5)*this.dy,
+    ];
+  }
+
   /**
    * Return a
    */
